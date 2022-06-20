@@ -95,3 +95,20 @@ h2 {
   font-size: 50px;
   font-weight: bold;
 }
+
+.GoogleButton {
+  border-radius: 5px !important;
+}
+
+.dishBtn {
+  justify-content: center !important;
+  align-items: center !important;
+  align-content: center !important;
+}
+
+.instcTitle {
+  font-weight: bold !important;
+  color: #000 !important;
+  font-size: 1.2rem !important;
+  opacity: none !important;
+}

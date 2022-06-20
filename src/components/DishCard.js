@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const DishCard = ({ dish }) => {
   const navigate = useNavigate();
   return (
-    <Card className="dishCard" sx={{ minWidth: 300, maxWidth: 345 }}>
+    <Card className="dishCard" sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -24,7 +24,7 @@ const DishCard = ({ dish }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className="dishBtn">
         {dish.strInstructions ? (
           <Modal dish={dish} />
         ) : (

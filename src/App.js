@@ -16,7 +16,8 @@ import axios from "axios";
 import { DB_API } from "./api";
 
 const App = () => {
-  const { mode, setUser } = useContext(MyContext);
+  const { mode, setUser, user } = useContext(MyContext);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -40,7 +41,10 @@ const App = () => {
           <Route path="/receipe/view/:id" element={<ViewDish />} />
           <Route path="/receipe/category/:name" element={<CategoryView />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/favorites"
+            element={user ? <Favorites /> : <Navigate replace to="/login" />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/404" element={<NotFound />} />

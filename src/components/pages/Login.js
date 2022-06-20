@@ -9,18 +9,18 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import GoogleButton from "react-google-button";
 import axios from "axios";
 import { MyContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import { DB_API } from "../../api";
+import GoogleButton from "react-google-button";
 
 export default function SignInSide() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const { setUser } = useContext(MyContext);
+  const { setUser, mode } = useContext(MyContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!email || !password) {
@@ -76,6 +76,7 @@ export default function SignInSide() {
           </Typography>
           <GoogleButton
             className="GoogleButton"
+            type={mode === "light" ? "dark" : "light"}
             onClick={() => {
               console.log("Google button clicked");
             }}

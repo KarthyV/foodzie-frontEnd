@@ -50,7 +50,7 @@ const Favorites = () => {
 
     return (
       <Container>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", height: "100vh" }}>
           <Box sx={{ width: "100%", borderBottom: 2, borderColor: "purple" }}>
             <Tab label="Here's your favorite recipes" />
           </Box>

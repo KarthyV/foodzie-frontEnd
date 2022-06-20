@@ -62,11 +62,16 @@ const Modal = ({ dish }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText component="div" id="alert-dialog-description">
-            {dish.strInstructions.split(".").map((line, i) => (
-              <Typography key={i} gutterBottom variant="h6" component="p">
-                {`${i}: ${line} \n`}
-              </Typography>
-            ))}
+            {dish.strInstructions.split(".").map((line, i) => {
+              const instruction = line === "" ? null : line.trimStart();
+              if (instruction !== null) {
+                return (
+                  <Typography key={i} gutterBottom variant="h6" component="p">
+                    {`${i + 1}: ${instruction} \n`}
+                  </Typography>
+                );
+              }
+            })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
