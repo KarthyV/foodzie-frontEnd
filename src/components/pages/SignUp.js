@@ -33,8 +33,6 @@ const SignInSide = () => {
         navigate("/");
       })
       .catch((error) => console.log(error));
-
-    console.log(email, password);
   };
 
   return (

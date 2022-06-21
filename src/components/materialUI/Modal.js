@@ -31,6 +31,7 @@ const Modal = ({ dish }) => {
           {
             headers: {
               "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
               Authorization: auth,
             },
           }
