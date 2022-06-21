@@ -28,7 +28,12 @@ const Modal = ({ dish }) => {
             recipeId: dish.idMeal,
             recipeName: dish.strMeal,
           },
-          { headers: { Authorization: auth } }
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: auth,
+            },
+          }
         )
         .then(({ data }) => {
           setUser(data);
