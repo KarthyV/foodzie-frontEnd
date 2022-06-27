@@ -30,7 +30,6 @@ const SignInSide = () => {
       .then(({ data }) => {
         setUser(data);
         localStorage.setItem("token", data.token);
-        navigate("/");
       })
       .catch((error) => console.log(error));
   };

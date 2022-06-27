@@ -15,26 +15,26 @@ import Button from "@mui/material/Button";
 import { DB_API } from "../../api";
 
 const Favorites = () => {
-  const { user, setUser } = useContext(MyContext);
+  const { currentUser, setCurrentUser } = useContext(MyContext);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user) {
+    if (!currentUser) {
       const token = localStorage.getItem("token");
       if (!token) return;
       const auth = `Bearer ${token}`;
       axios
         .post(`${DB_API}/auto-login`, {}, { headers: { Authorization: auth } })
         .then(({ data }) => {
-          setUser(data);
+          setCurrentUser(data);
           setFavorites(data.favorites);
         })
         .catch((err) => console.log(err));
     }
-    if (user) setFavorites(user.favorites);
+    if (currentUser) setFavorites(currentUser.favorites);
   }, []);
 
-  if (!user) return <div>Loading...</div>;
+  if (!currentUser) return <div>Loading...</div>;
   else {
     if (!favorites.length)
       return (
@@ -80,7 +80,7 @@ const Favorites = () => {
                         { headers: { Authorization: auth } }
                       )
                       .then(({ data }) => {
-                        setUser(data);
+                        setCurrentUser(data);
                         setFavorites(data.favorites);
                         alert("Recipe Removed from Favorites");
                       })

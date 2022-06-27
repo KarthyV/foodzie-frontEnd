@@ -8,19 +8,21 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
+import Avatar from "@mui/material/Avatar";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ResponsiveAppBar = (props) => {
-  const { mode, setMode, setUser } = useContext(MyContext);
+  const { currentUser, setMode, setCurrentUser } = useContext(MyContext);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { logout, user } = useAuth0();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,11 +37,10 @@ const ResponsiveAppBar = (props) => {
     if (path === "Categories") navigate("/categories");
     if (path === "Favorites") navigate("/favorites");
     if (path === "Login") navigate("/login");
-    if (path === "Sign Up") navigate("/signup");
     if (path === "Log Out") {
       localStorage.clear();
-      setUser(null);
-      navigate("/login");
+      logout({ returnTo: window.location.origin });
+      setCurrentUser(null);
     }
     setAnchorElNav(null);
   };
@@ -143,7 +144,11 @@ const ResponsiveAppBar = (props) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Change Mode">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {mode === "light" ? <Brightness7Icon /> : <Brightness4Icon />}
+                {currentUser ? (
+                  <Avatar alt={user.name} src={user.picture} />
+                ) : (
+                  <Brightness7Icon />
+                )}
               </IconButton>
             </Tooltip>
             <Menu

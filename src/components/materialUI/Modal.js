@@ -14,7 +14,7 @@ import { DB_API } from "../../api";
 const Modal = ({ dish }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { user, setUser } = useContext(MyContext);
+  const { currentUser, setCurrentUser } = useContext(MyContext);
 
   const handleClose = (e) => {
     if (e.target.textContent === "Add to Favorites") {
@@ -37,7 +37,7 @@ const Modal = ({ dish }) => {
           }
         )
         .then(({ data }) => {
-          setUser(data);
+          setCurrentUser(data);
           alert("Recipe Added to Favorites");
         })
         .catch((err) => {
@@ -82,7 +82,9 @@ const Modal = ({ dish }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          {user && <Button onClick={handleClose}>Add to Favorites</Button>}
+          {currentUser && (
+            <Button onClick={handleClose}>Add to Favorites</Button>
+          )}
           <Button onClick={handleClose} autoFocus>
             Watch Video
           </Button>

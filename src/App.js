@@ -6,7 +6,6 @@ import ViewDish from "./components/ViewDish";
 import Categories from "./components/Category/Categories";
 import CategoryView from "./components/Category/CategoryCard";
 import Login from "./components/pages/Login";
-import SignUp from "./components/pages/SignUp";
 import NotFound from "./components/pages/pageNotFound";
 import Favorites from "./components/pages/Favorites";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -16,7 +15,7 @@ import axios from "axios";
 import { DB_API } from "./api";
 
 const App = () => {
-  const { mode, setUser, user } = useContext(MyContext);
+  const { mode, setCurrentUser, currentUser } = useContext(MyContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -24,7 +23,7 @@ const App = () => {
     const auth = `Bearer ${token}`;
     axios
       .post(`${DB_API}/auto-login`, {}, { headers: { Authorization: auth } })
-      .then(({ data }) => setUser(data))
+      .then(({ data }) => setCurrentUser(data))
       .catch((err) => console.log(err));
   }, []);
   const darkTheme = createTheme({
@@ -43,10 +42,12 @@ const App = () => {
           <Route path="/categories" element={<Categories />} />
           <Route
             path="/favorites"
-            element={user ? <Favorites /> : <Navigate replace to="/login" />}
+            element={
+              currentUser ? <Favorites /> : <Navigate replace to="/login" />
+            }
           />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/signup" element={<SignUp />} /> */}
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
         </Routes>

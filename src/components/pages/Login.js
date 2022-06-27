@@ -1,45 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { MyContext } from "../../context";
-import { useNavigate } from "react-router-dom";
-import { DB_API } from "../../api";
+import { useAuth0 } from "@auth0/auth0-react";
 import GoogleButton from "react-google-button";
 
 export default function SignInSide() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const { setUser, mode } = useContext(MyContext);
+  const { loginWithRedirect, user } = useAuth0();
+
+  const { mode } = useContext(MyContext);
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!email || !password) {
-      return alert("Please fill out the fields");
-    }
-
-    axios
-      .post(`${DB_API}/login`, { email, password })
-      .then(({ data }) => {
-        if (data.message) {
-          setError(true);
-        } else {
-          setUser(data);
-          localStorage.setItem("token", data.token);
-          navigate("/");
-        }
-      })
-      .catch((error) => console.log(error));
+    loginWithRedirect();
   };
+
+  console.log(user);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -66,70 +46,37 @@ export default function SignInSide() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "auto",
+            borderBottom: 2,
+            borderColor: "purple",
+            padding: "10px",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Register/SignUp
           </Typography>
           <GoogleButton
             className="GoogleButton"
             type={mode === "light" ? "dark" : "light"}
-            onClick={() => {
-              console.log("Google button clicked");
-            }}
+            onClick={handleSubmit}
           />
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              error={error}
-              helperText={error ? "Invalid Credentials" : ""}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-            <TextField
-              error={error}
-              helperText={error ? "Invalid Credentials" : ""}
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Login
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link to="/signup" style={{ color: "blue" }}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
         </Box>
+        <div className="quotes">
+          <div>
+            <Typography className="quote" component="p" variant="i">
+              “See that's what people don't get about food. It's never the food,
+              it's the love that goes into making it. That's what's important.”
+            </Typography>
+          </div>
+          <div className="quoteCreater" item>
+            <Typography component="h4" variant="p">
+              ― Sarah Strohmeyer, Sweet Love
+            </Typography>
+          </div>
+        </div>
       </Grid>
     </Grid>
   );

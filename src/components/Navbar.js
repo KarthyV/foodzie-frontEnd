@@ -3,10 +3,10 @@ import ResponsiveAppBar from "./materialUI/ResponsiveAppBar";
 import { MyContext } from "../context";
 
 const Navbar = () => {
-  const { user } = useContext(MyContext);
+  const { currentUser } = useContext(MyContext);
 
-  const pages = !user
-    ? ["Home", "Categories", "Login", "Sign Up"]
+  const pages = !currentUser
+    ? ["Home", "Categories", "Login"]
     : ["Home", "Categories", "Favorites", "Log Out"];
   const mode = ["Light mode", "Dark mode"];
 

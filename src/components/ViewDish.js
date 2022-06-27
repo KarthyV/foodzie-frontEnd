@@ -14,7 +14,7 @@ import { API, DB_API } from "../api";
 
 const ViewDish = () => {
   const { id } = useParams();
-  const { user, setUser } = useContext(MyContext);
+  const { currentUser, setCurrentUser } = useContext(MyContext);
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const ViewDish = () => {
           }
         )
         .then(({ data }) => {
-          setUser(data);
+          setCurrentUser(data);
           alert("Recipe Added to Favorites");
         })
         .catch((err) => {
@@ -71,7 +71,7 @@ const ViewDish = () => {
                 );
               })}
             </List>
-            {user && (
+            {currentUser && (
               <Button color="secondary" variant="contained" onClick={handleAdd}>
                 Add to Favorites
               </Button>
