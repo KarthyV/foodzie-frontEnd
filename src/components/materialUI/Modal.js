@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import { MyContext } from "../../context";
 import axios from "axios";
 import { DB_API } from "../../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Modal = ({ dish }) => {
   const navigate = useNavigate();
@@ -37,8 +39,8 @@ const Modal = ({ dish }) => {
           }
         )
         .then(({ data }) => {
+          toast.success("Recipe Added to Favorites");
           setCurrentUser(data);
-          alert("Recipe Added to Favorites");
         })
         .catch((err) => {
           console.log(err);
@@ -85,6 +87,7 @@ const Modal = ({ dish }) => {
           {currentUser && (
             <Button onClick={handleClose}>Add to Favorites</Button>
           )}
+          <ToastContainer />
           <Button onClick={handleClose} autoFocus>
             Watch Video
           </Button>

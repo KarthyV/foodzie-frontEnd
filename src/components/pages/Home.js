@@ -5,6 +5,7 @@ import axios from "axios";
 import DisplayDishes from "../DisplayDishes";
 import { MyContext } from "../../context";
 import { API } from "../../api";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const { dishes, setDishes } = useContext(MyContext);
@@ -28,6 +29,7 @@ const Home = () => {
         <SearchBox />
       </div>
       {dishes !== undefined ? <DisplayDishes dishes={dishes} /> : "Loading..."}
+      <ToastContainer />
     </div>
   );
 };

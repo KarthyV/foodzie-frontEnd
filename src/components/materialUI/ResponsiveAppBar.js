@@ -145,7 +145,10 @@ const ResponsiveAppBar = (props) => {
             <Tooltip title="Change Mode">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {currentUser ? (
-                  <Avatar alt={user.name} src={user.picture} />
+                  <Avatar
+                    alt={user ? user.name : ""}
+                    src={user ? user.picture : ""}
+                  />
                 ) : (
                   <Brightness7Icon />
                 )}

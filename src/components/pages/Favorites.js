@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { DB_API } from "../../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Favorites = () => {
   const { currentUser, setCurrentUser } = useContext(MyContext);
@@ -82,7 +84,7 @@ const Favorites = () => {
                       .then(({ data }) => {
                         setCurrentUser(data);
                         setFavorites(data.favorites);
-                        alert("Recipe Removed from Favorites");
+                        toast.warn("Recipe Removed from Favorites");
                       })
                       .catch((err) => {
                         console.log(err);
@@ -92,6 +94,7 @@ const Favorites = () => {
                   <DeleteIcon />
                   DELETE
                 </Button>
+                <ToastContainer />
               </ListItemButton>
             );
           })}
