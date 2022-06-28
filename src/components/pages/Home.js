@@ -9,10 +9,11 @@ import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const { dishes, setDishes } = useContext(MyContext);
+  const randomLetter = () => String.fromCharCode(0 | (Math.random() * 15 + 97));
 
   useEffect(() => {
     axios
-      .get(`${API}/search.php?f=p`)
+      .get(`${API}/search.php?f=${randomLetter()}`)
       .then(({ data }) => setDishes(data.meals))
       .catch((err) => console.log(err));
   }, []);
