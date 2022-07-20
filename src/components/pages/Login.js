@@ -11,15 +11,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import GoogleButton from "react-google-button";
 
 export default function SignInSide() {
-  const { loginWithRedirect, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0(); // Getting the user details and login method from Auth0
 
   const { mode } = useContext(MyContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     loginWithRedirect();
   };
-
-  console.log(user);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>

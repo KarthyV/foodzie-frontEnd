@@ -14,6 +14,7 @@ const AppContext = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      //Getting the user based on Auth0 authentication
       axios
         .post(`${DB_API}/users`, { email: user.email, name: user.name })
         .then(({ data }) => {
@@ -22,8 +23,10 @@ const AppContext = ({ children }) => {
         })
         .catch((error) => console.log(error));
     }
+    // eslint-disable-next-line
   }, [isAuthenticated]);
 
+  // Passing all the states to the context store as values, which makes it available across all child component
   return (
     <MyContext.Provider
       value={{

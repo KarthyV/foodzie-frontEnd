@@ -20,9 +20,11 @@ const ViewDish = () => {
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
+    // Getting the particular dish based on the id
     axios.get(`${API}/lookup.php?i=${id}`).then(({ data }) => {
       setRecipe(data.meals);
     });
+    // eslint-disable-next-line
   }, []);
 
   if (!recipe[0]) return <div>Loading...</div>;
@@ -54,12 +56,12 @@ const ViewDish = () => {
         .catch((err) => {
           console.log(err);
         });
-      console.log(recipe[0].idMeal, recipe[0].strMeal);
     };
     return (
       <Container className="viewDish" maxWidth="xl">
         <Box sx={{ maxWidth: "auto", minHeight: "auto" }}>
           <Paper elevation={3}>
+            {/* React Player for playing the youtube video */}
             <ReactPlayer width="100%" controls url={recipe[0].strYoutube} />
             <Box sx={{ width: "100%", borderBottom: 2, borderColor: "purple" }}>
               <Tab className="instcTitle" label="Instructions to be Followed" />

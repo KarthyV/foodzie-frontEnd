@@ -5,7 +5,7 @@ import { MyContext } from "../context";
 const Navbar = () => {
   const { currentUser } = useContext(MyContext);
 
-  const pages = !currentUser
+  const pages = !currentUser // Navbar config based on the user state
     ? ["Home", "Categories", "Login"]
     : ["Home", "Categories", "Favorites", "Log Out"];
   const mode = ["Light mode", "Dark mode"];

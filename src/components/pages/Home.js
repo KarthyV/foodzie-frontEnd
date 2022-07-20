@@ -9,13 +9,14 @@ import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const { dishes, setDishes } = useContext(MyContext);
-  const randomLetter = () => String.fromCharCode(0 | (Math.random() * 15 + 97));
+  const randomLetter = () => String.fromCharCode(0 | (Math.random() * 15 + 97)); //Generates a random letter
 
   useEffect(() => {
     axios
-      .get(`${API}/search.php?f=${randomLetter()}`)
+      .get(`${API}/search.php?f=${randomLetter()}`) // Gets a random recipe each time the page gets reloaded
       .then(({ data }) => setDishes(data.meals))
       .catch((err) => console.log(err));
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -8,6 +8,7 @@ import Modal from "./materialUI/Modal";
 import { useNavigate } from "react-router-dom";
 
 const DishCard = ({ dish }) => {
+  //Receiving the dish details as prop
   const navigate = useNavigate();
   return (
     <Card className="dishCard" sx={{ maxWidth: 345 }}>

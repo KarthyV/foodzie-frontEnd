@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 const DisplayDishes = ({ dishes }) => {
+  // Getting the dishes from the home page as props
   if (!dishes)
     return (
       <div>

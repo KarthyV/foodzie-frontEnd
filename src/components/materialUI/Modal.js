@@ -20,18 +20,19 @@ const Modal = ({ dish }) => {
 
   const handleClose = (e) => {
     if (e.target.textContent === "Add to Favorites") {
-      const token = localStorage.getItem("token");
-      if (!token) return;
+      const token = localStorage.getItem("token"); //Getting the JWT token from localStorage
+      if (!token) return; // if not found do not proceed further Guard clause
       const auth = `Bearer ${token}`;
       axios
         .post(
-          `${DB_API}/add-favorites`,
+          `${DB_API}/add-favorites`, //POST request
           {
-            recipeId: dish.idMeal,
+            recipeId: dish.idMeal, // data to be posted
             recipeName: dish.strMeal,
           },
           {
             headers: {
+              //Header method
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "*",
               Authorization: auth,
@@ -39,6 +40,7 @@ const Modal = ({ dish }) => {
           }
         )
         .then(({ data }) => {
+          // Once adding is success, resetting the user state
           toast.success("Recipe Added to Favorites");
           setCurrentUser(data);
         })
@@ -47,7 +49,7 @@ const Modal = ({ dish }) => {
         });
       setOpen(false);
     } else if (e.target.textContent === "Watch Video") {
-      navigate(`/receipe/view/${dish.idMeal}`);
+      navigate(`/receipe/view/${dish.idMeal}`); // Navigating to the watch page based on meal ID
       setOpen(false);
     } else {
       setOpen(false);
@@ -70,6 +72,7 @@ const Modal = ({ dish }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText component="div" id="alert-dialog-description">
+            {/* eslint-disable-next-line */}
             {dish.strInstructions.split(".").map((line, i) => {
               const instruction = line === "" ? null : line.trimStart();
               if (instruction !== null) {

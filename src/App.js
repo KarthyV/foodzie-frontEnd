@@ -18,13 +18,15 @@ const App = () => {
   const { mode, setCurrentUser, currentUser } = useContext(MyContext);
 
   useEffect(() => {
+    // Checking whether there is JWT token available
     const token = localStorage.getItem("token");
     if (!token) return;
-    const auth = `Bearer ${token}`;
+    const auth = `Bearer ${token}`; //If available logging the user in automatically
     axios
       .post(`${DB_API}/auto-login`, {}, { headers: { Authorization: auth } })
       .then(({ data }) => setCurrentUser(data))
       .catch((err) => console.log(err));
+    // eslint-disable-next-line
   }, []);
   const darkTheme = createTheme({
     palette: {
@@ -47,7 +49,6 @@ const App = () => {
             }
           />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/signup" element={<SignUp />} /> */}
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
         </Routes>
