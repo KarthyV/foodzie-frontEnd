@@ -41,10 +41,10 @@ const ViewDish = () => {
             recipeId: recipe[0].idMeal,
             recipeName: recipe[0].strMeal,
           },
+          { mode: "cors" },
           {
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
               Authorization: auth,
             },
           }

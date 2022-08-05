@@ -30,11 +30,11 @@ const Modal = ({ dish }) => {
             recipeId: dish.idMeal, // data to be posted
             recipeName: dish.strMeal,
           },
+          { mode: "cors" },
           {
             headers: {
               //Header method
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
               Authorization: auth,
             },
           }
