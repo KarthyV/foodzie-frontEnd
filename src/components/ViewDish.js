@@ -43,7 +43,6 @@ const ViewDish = () => {
           },
           {
             headers: {
-              "Content-Type": "application/json",
               Authorization: auth,
             },
           }

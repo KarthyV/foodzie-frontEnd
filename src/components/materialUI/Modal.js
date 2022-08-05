@@ -33,7 +33,6 @@ const Modal = ({ dish }) => {
           {
             headers: {
               //Header method
-              "Content-Type": "application/json",
               Authorization: auth,
             },
           }
